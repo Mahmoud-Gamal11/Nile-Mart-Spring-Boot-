@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Product - NileMart</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: nav('products')}"></div>
+
+<div class="container">
+    <div class="form-card">
+        <h2 style="margin-bottom: 1.5rem; color: #1e293b;">Add New Product</h2>
+
+        <form th:action="@{/products}" th:object="${product}" method="post">
+            <div class="form-group">
+                <label for="sku">SKU</label>
+                <input id="sku" type="text" th:field="*{sku}" class="form-control" th:classappend="${#fields.hasErrors('sku')} ? 'is-invalid' : ''">
+                <span class="error-text" th:if="${#fields.hasErrors('sku')}" th:errors="*{sku}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" type="text" th:field="*{name}" class="form-control" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                <span class="error-text" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category (Sub-categories only)</label>
+                <select id="category" th:field="*{category}" class="form-control" th:classappend="${#fields.hasErrors('category')} ? 'is-invalid' : ''">
+                    <option value="">-- Select Sub-Category --</option>
+                    <option th:each="c : ${subCategories}" th:value="${c.slug}" th:text="${c.name}"></option>
+                </select>
+                <span class="error-text" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="brandSlug">Brand</label>
+                <select id="brandSlug" th:field="*{brandSlug}" class="form-control" th:classappend="${#fields.hasErrors('brandSlug')} ? 'is-invalid' : ''">
+                    <option value="">No brand</option>
+                    <option th:each="b : ${activeBrands}" th:value="${b.slug}" th:text="${b.name}"></option>
+                </select>
+                <span class="error-text" th:if="${#fields.hasErrors('brandSlug')}" th:errors="*{brandSlug}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input id="price" type="number" step="0.01" th:field="*{price}" class="form-control" th:classappend="${#fields.hasErrors('price')} ? 'is-invalid' : ''">
+                <span class="error-text" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="inStock">Stock</label>
+                <input id="inStock" type="number" th:field="*{inStock}" class="form-control" th:classappend="${#fields.hasErrors('inStock')} ? 'is-invalid' : ''">
+                <span class="error-text" th:if="${#fields.hasErrors('inStock')}" th:errors="*{inStock}"></span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save product</button>
+                <a th:href="@{/products}" class="btn btn-secondary">Back to products</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

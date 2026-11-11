@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Brand - NileMart</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: nav('brands')}"></div>
+
+<div class="container">
+    <div class="form-card">
+        <h2 style="margin-bottom: 1.5rem; color: #1e293b;">Add New Brand</h2>
+
+        <form th:action="@{/brands}" th:object="${brand}" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" type="text" th:field="*{name}" class="form-control" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                <span class="error-text" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="slug">Slug</label>
+                <input id="slug" type="text" th:field="*{slug}" class="form-control" th:classappend="${#fields.hasErrors('slug')} ? 'is-invalid' : ''" placeholder="e.g. nile-cotton">
+                <span class="error-text" th:if="${#fields.hasErrors('slug')}" th:errors="*{slug}"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-checkbox">
+                    <input type="checkbox" th:field="*{active}">
+                    <span>Active</span>
+                </label>
+                <span class="error-text" th:if="${#fields.hasErrors('active')}" th:errors="*{active}"></span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save brand</button>
+                <a th:href="@{/brands}" class="btn btn-secondary">Back to brands</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+

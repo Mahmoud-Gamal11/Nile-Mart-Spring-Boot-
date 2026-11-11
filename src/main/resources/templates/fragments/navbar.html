@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav class="navbar" th:fragment="nav(activeTab)">
+    <a th:href="@{/products}" class="nav-brand">NileMart Back Office</a>
+    <ul class="nav-links">
+        <li><a th:href="@{/products}" th:classappend="${activeTab == 'products'} ? 'active' : ''">Products</a></li>
+        <li><a th:href="@{/categories}" th:classappend="${activeTab == 'categories'} ? 'active' : ''">Categories</a></li>
+        <li><a th:href="@{/brands}" th:classappend="${activeTab == 'brands'} ? 'active' : ''">Brands</a></li>
+    </ul>
+</nav>
+</body>
+</html>
+

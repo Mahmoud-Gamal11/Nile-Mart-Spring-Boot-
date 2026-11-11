@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories - NileMart</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: nav('categories')}"></div>
+
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">Categories</h1>
+        <a th:href="@{/categories/new}" class="btn btn-primary">+ Add Category</a>
+    </div>
+
+    <div class="card">
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Parent</th>
+                <th>Order</th>
+                <th>Active</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(categories)}">
+                <td colspan="5" style="text-align: center; color: #64748b; padding: 2rem;">No categories available.</td>
+            </tr>
+            <tr th:each="cat : ${categories}">
+                <td th:text="${cat.name}" th:class="${cat.subCategory} ? 'sub-category-name' : 'top-category-name'"></td>
+                <td th:text="${cat.slug}"></td>
+                <td th:text="${cat.parentName}"></td>
+                <td th:text="${cat.displayOrder}"></td>
+                <td>
+                    <span th:if="${cat.active}" class="badge badge-yes">Yes</span>
+                    <span th:unless="${cat.active}" class="badge badge-no">No</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+

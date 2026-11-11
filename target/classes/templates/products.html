@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products - NileMart</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: nav('products')}"></div>
+
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">Products</h1>
+        <a th:href="@{/products/new}" class="btn btn-primary">+ Add Product</a>
+    </div>
+
+    <div class="card">
+        <table>
+            <thead>
+            <tr>
+                <th>SKU</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Price</th>
+                <th>Stock</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(products)}">
+                <td colspan="6" style="text-align: center; color: #64748b; padding: 2rem;">No products available.</td>
+            </tr>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.sku}" style="font-weight: 600;"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.categoryName}"></td>
+                <td th:text="${product.brandName}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.inStock}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
